@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:src="@drawable/ic_launcher_background">
+        android:src="@drawable/mychatapplogo">
 
     </ImageView>
 
@@ -22,21 +22,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
+        android:fontFamily="@font/playlist"
         android:padding="20dp"
-        android:text="Chat App Will Send OTP To Your Number"
+        android:text="Let's Chat !"
         android:textAlignment="center"
-        android:textColor="#6e6e6e"
-        android:textSize="20sp"
+        android:textColor="#950909"
+        android:textSize="48sp"
         android:textStyle="bold">
 
     </TextView>
 
 
     <RelativeLayout
+        android:id="@+id/centerhorizontalline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:id="@+id/centerhorizontalline">
+        android:layout_centerVertical="true">
 
     </RelativeLayout>
 
@@ -78,7 +79,7 @@
         android:layout_below="@id/getphonenumber"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="#25d366"
+        android:background="#EF554F"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="Send OTP"
@@ -98,10 +99,6 @@
         android:visibility="invisible">
 
     </ProgressBar>
-
-
-
-
 
 
 </RelativeLayout>

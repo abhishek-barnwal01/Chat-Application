@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="0dp"
-        android:background="#075e54"
+        android:background="#AA312C"
         android:id="@+id/toolbar">
 
 
@@ -23,11 +23,14 @@
 
             <TextView
                 android:id="@+id/myapptext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ChatApp"
+                android:layout_width="173dp"
+                android:layout_height="55dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="237dp"
+                android:fontFamily="cursive"
+                android:text="Let's Chat"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="34sp"
                 android:textStyle="bold">
 
             </TextView>
@@ -42,11 +45,11 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="0dp"
-        android:backgroundTint="#075e54"
+        android:backgroundTint="#AA312C"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorHeight="3dp"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="#77a3a7">
+        app:tabTextColor="@color/white">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/chat"

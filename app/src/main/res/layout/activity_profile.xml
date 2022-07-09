@@ -8,14 +8,12 @@
     tools:context=".ProfileActivity">
 
 
-
-
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarofviewprofile"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="0dp"
-        android:background="#075e54"
-        android:id="@+id/toolbarofviewprofile">
+        android:background="#AA312C">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,13 +21,13 @@
             android:gravity="center_vertical">
 
             <ImageButton
+                android:id="@+id/backbuttonofviewprofile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/backbuttonofviewprofile"
-                android:tint="@color/white"
+                android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_baseline_arrow_back_24"
-                android:layout_centerVertical="true">
+                android:tint="@color/white">
 
             </ImageButton>
 
@@ -52,8 +50,6 @@
         </RelativeLayout>
 
 
-
-
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -71,7 +67,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/defaultprofile"
             android:id="@+id/viewuserimageinimageview"
             android:scaleType="centerCrop">
 
@@ -108,18 +104,21 @@
     </EditText>
 
     <TextView
+        android:id="@+id/movetoupdateprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Your Profile"
-        android:layout_centerInParent="true"
         android:layout_below="@id/viewusername"
+        android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
+        android:background="#EF554F"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:id="@+id/movetoupdateprofile"
-        android:textColor="#303030">
+        android:text="Update Profile"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold">
 
     </TextView>
 
