@@ -1,10 +1,5 @@
 package com.example.chatapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabItem;
@@ -41,12 +41,16 @@ public class ChatActivity extends AppCompatActivity {
 
         tabLayout=findViewById(R.id.include);
         mchat=findViewById(R.id.chat);
-        mcall=findViewById(R.id.calls);
-        mstatus=findViewById(R.id.status);
-       viewPager=findViewById(R.id.fragmentcontainer);
+//        mcall=findViewById(R.id.calls);
+//        mstatus=findViewById(R.id.status);
+        viewPager=findViewById(R.id.fragmentcontainer);
+
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseAuth=FirebaseAuth.getInstance();
 
         mtoolbar=findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
+
 
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_baseline_more_vert_24);
         mtoolbar.setOverflowIcon(drawable);
@@ -54,7 +58,6 @@ public class ChatActivity extends AppCompatActivity {
 
         pagerAdapter=new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
-
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -65,8 +68,6 @@ public class ChatActivity extends AppCompatActivity {
                 {
                     pagerAdapter.notifyDataSetChanged();
                 }
-
-
 
             }
 
@@ -80,8 +81,13 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -94,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
                 break;
 
             case R.id.settings:
-                Toast.makeText(getApplicationContext(),"Settings is clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Settign is clicked",Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -102,6 +108,7 @@ public class ChatActivity extends AppCompatActivity {
 
         return  true;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,6 +120,31 @@ public class ChatActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DocumentReference documentReference=firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        documentReference.update("status","Offline").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(),"Now User is Offline",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DocumentReference documentReference=firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        documentReference.update("status","Online").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(),"Now User is Online",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 }

@@ -12,30 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="0dp"
-        android:background="#AA312C"
+        android:background="#075e54"
         android:id="@+id/toolbar">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
-
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MyChatApp"
+                android:textSize="20sp"
                 android:id="@+id/myapptext"
-                android:layout_width="173dp"
-                android:layout_height="55dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="237dp"
-                android:fontFamily="cursive"
-                android:text="Let's Chat"
-                android:textColor="@color/white"
-                android:textSize="34sp"
-                android:textStyle="bold">
+                android:textStyle="bold"
+                android:textColor="@color/white">
 
             </TextView>
 
+
         </RelativeLayout>
+
+
+
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -45,11 +44,11 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="0dp"
-        android:backgroundTint="#AA312C"
+        android:backgroundTint="#075e54"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorHeight="3dp"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white">
+        app:tabTextColor="#77a3a7">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/chat"
@@ -59,33 +58,39 @@
 
         </com.google.android.material.tabs.TabItem>
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status">
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/status"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Status">-->
 
-        </com.google.android.material.tabs.TabItem>
+<!--        </com.google.android.material.tabs.TabItem>-->
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/calls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calls">
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/calls"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Calls">-->
 
-        </com.google.android.material.tabs.TabItem>
+<!--        </com.google.android.material.tabs.TabItem>-->
 
 
     </com.google.android.material.tabs.TabLayout>
 
+
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragmentcontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/include"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        android:id="@+id/fragmentcontainer">
 
     </androidx.viewpager.widget.ViewPager>
+
+
+
+
+
 
 
 </RelativeLayout>

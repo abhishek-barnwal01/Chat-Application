@@ -1,10 +1,5 @@
 package com.example.chatapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,6 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,12 +33,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class setProfile extends AppCompatActivity {
+public class setProfile extends AppCompatActivity implements View.OnClickListener {
 
     private CardView mgetuserimage;
     private ImageView mgetuserimageinimageview;
-    private static int PICK_IMAGE=1;
-    private Uri imagepath = null;
+    private static int PICK_IMAGE=123;
+    private Uri imagepath;
 
     private EditText mgetusername;
 
@@ -55,11 +56,11 @@ public class setProfile extends AppCompatActivity {
 
     ProgressBar mprogressbarofsetprofile;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_profile);
-
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseStorage=FirebaseStorage.getInstance();
@@ -74,40 +75,51 @@ public class setProfile extends AppCompatActivity {
         mprogressbarofsetprofile=findViewById(R.id.progressbarofsetProfile);
 
 
-        mgetuserimage.setOnClickListener(new View.OnClickListener() {
+//        mgetuserimage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//                startActivityForResult(intent,PICK_IMAGE);
+////                startActivity(intent);
+//
+//            }
+//        });
+
+        mgetuserimage.setOnClickListener(this);
+
+        msaveprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(intent,PICK_IMAGE);
+                name=mgetusername.getText().toString();
+                if(name.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Name is Empty",Toast.LENGTH_SHORT).show();
+                }
+                else if(imagepath==null)
+                {
+                    Toast.makeText(getApplicationContext(),"Image is Empty",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
+                    mprogressbarofsetprofile.setVisibility(View.VISIBLE);
+                    sendDataForNewUser();
+                    mprogressbarofsetprofile.setVisibility(View.INVISIBLE);
+                    Intent intent=new Intent(setProfile.this,ChatActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
             }
         });
 
 
 
-       msaveprofile.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               name=mgetusername.getText().toString();
-               if(name.isEmpty()){
-                   Toast.makeText(getApplicationContext(), "Name is Empty", Toast.LENGTH_SHORT).show();
-               }
-               else if (imagepath==null){
-                   Toast.makeText(getApplicationContext(), "Image is Empty", Toast.LENGTH_SHORT).show();
-               }
-               else{
-                   mprogressbarofsetprofile.setVisibility(view.VISIBLE);
-                   sendDataForNewUser();
-                   mprogressbarofsetprofile.setVisibility(View.INVISIBLE);
-                   Intent intent=new Intent(setProfile.this,ChatActivity.class);
-                   startActivity(intent);
-                   finish();
 
-               }
-           }
-       });
 
 
     }
+
 
     private void sendDataForNewUser()
     {
@@ -130,6 +142,7 @@ public class setProfile extends AppCompatActivity {
         sendImagetoStorage();
 
     }
+
     private void sendImagetoStorage()
     {
 
@@ -152,37 +165,41 @@ public class setProfile extends AppCompatActivity {
 
         ///putting image to storage
 
-       UploadTask uploadTask= imageref.putBytes(data);
-       uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-           @Override
-           public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-               imageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                   @Override
-                   public void onSuccess(Uri uri) { 
-                       ImageUriAcessToken=uri.toString();
-                       Toast.makeText(getApplicationContext(), "URI get success", Toast.LENGTH_SHORT).show();
-                       sendDataTocloudFirestore();
-                   }
-               }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(getApplicationContext(), "URI get Failed", Toast.LENGTH_SHORT).show();
+        UploadTask uploadTask=imageref.putBytes(data);
 
-                   }
-               });
-               Toast.makeText(getApplicationContext(), "Image is Uploaded", Toast.LENGTH_SHORT).show();
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Toast.makeText(getApplicationContext(), "Image not Uploaded", Toast.LENGTH_SHORT).show();
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-           }
-       });
+                imageref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        ImageUriAcessToken=uri.toString();
+                        Toast.makeText(getApplicationContext(),"URI get sucess",Toast.LENGTH_SHORT).show();
+                        sendDataTocloudFirestore();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(),"URI get Failed",Toast.LENGTH_SHORT).show();
+                    }
+
+
+                });
+                Toast.makeText(getApplicationContext(),"Image is uploaded",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Image Not UPdloaded",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
     private void sendDataTocloudFirestore() {
+
 
         DocumentReference documentReference=firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
         Map<String , Object> userdata=new HashMap<>();
@@ -199,17 +216,54 @@ public class setProfile extends AppCompatActivity {
             }
         });
 
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if(requestCode==PICK_IMAGE && resultCode== RESULT_OK){
+
+    }
+
+
+
+
+//    private void openGallery() {
+//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//        startActivityForResult(gallery, PICK_IMAGE);
+//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==PICK_IMAGE && resultCode==RESULT_OK)
+        {
             imagepath=data.getData();
             mgetuserimageinimageview.setImageURI(imagepath);
+
         }
-
-
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
+    @Override
+    public void onClick(View view) {
+        mgetuserimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.addFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION);
+                pickImage.launch(intent);
+//                startActivityForResult(intent,PICK_IMAGE);
+//                startActivity(intent);
+
+            }
+        });
+    }
+    private final ActivityResultLauncher<Intent> pickImage=registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if(result.getResultCode()==RESULT_OK){
+                    if(result.getData()!=null){
+                        Uri imageuri=result.getData().getData();
+                        try{
+                            Intent data = result.getData();
+                            imagepath=data.getData();
+                            mgetuserimageinimageview.setImageURI(imagepath);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
 }

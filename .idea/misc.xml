@@ -3,18 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/drawable-v24/senderchatdrawable.xml" value="0.2425" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2185" />
-        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_chat.xml" value="0.2" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/drawable/messagebackgroun.xml" value="0.1915" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_call.xml" value="0.109765625" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_chat.xml" value="0.152" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_otp_authentication.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_profile.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_set_profile.xml" value="0.205859375" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_specifichat.xml" value="0.2" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_splashscreen.xml" value="0.2" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/activity_update_profile.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/callfragment.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/chatFragment.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/chatfragment.xml" value="0.21484375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/chatviewlayout.xml" value="0.2140625" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/senderchatlayout.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/layout/statusfragment.xml" value="0.205859375" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ChatApp/app/src/main/res/menu/menu.xml" value="0.205859375" />
       </map>
