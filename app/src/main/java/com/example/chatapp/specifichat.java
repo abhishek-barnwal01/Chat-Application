@@ -1,8 +1,10 @@
 package com.example.chatapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +47,7 @@ public class specifichat extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
     String senderroom,recieverroom;
-
+    Button callbtn;
     ImageButton mbackbuttonofspecificchat;
 
     RecyclerView mmessagerecyclerview;
@@ -138,10 +140,11 @@ public class specifichat extends AppCompatActivity {
         mbackbuttonofspecificchat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
-
+                finish();
             }
         });
+
+
         mnameofspecificuser.setText(mrecievername);
         String uri=intent.getStringExtra("imageuri");
         if(uri.isEmpty())
@@ -226,17 +229,11 @@ public class specifichat extends AppCompatActivity {
     }
 
 
-    public void call(View view) {
-        Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show();
-
-//        callBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String phoneNumber=phoneNumberEditText.getText().toString();
-//                Intent intent=new Intent(Intent.ACTION_DIAL);
-//                intent.setData(Uri.parse("tel:"+phoneNumber));
-//                startActivity(intent);
-//            }
-//        });
+    public void callUser(View view) {
+        String phone=firebaseAuth.getCurrentUser().getPhoneNumber();
+        Intent intent=new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+phone));
+        startActivity(intent);
     }
+
 }
